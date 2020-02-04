@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { blue } from "../utils/colors";
 
 export default class Loading extends Component {
   render() {
     return (
       <View style={[styles.container, styles.horizontal]}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color={blue} />
       </View>
     );
   }
