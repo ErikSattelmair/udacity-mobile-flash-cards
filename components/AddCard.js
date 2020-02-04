@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Text, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native'
 import { connect } from "react-redux";
 import { addCardToDeck } from "../actions";
+import { addCardToDeck as saveCardAsynch } from '../utils/api'
 
 class AddCard extends Component {
 
@@ -25,8 +26,13 @@ class AddCard extends Component {
     handleSubmit = () => {
         const { question, answer } = this.state
         const { dispatch, navigation } = this.props
+        const deck = navigation.state.params.deck
+        const card = {
+            question,
+            answer
+        }
 
-        dispatch(addCardToDeck({question, answer}, navigation.state.params.deck))
+        saveCardAsynch(deck, card).then(dispatch(addCardToDeck({question, answer}, deck)))
 
         this.setState({
             question: '',

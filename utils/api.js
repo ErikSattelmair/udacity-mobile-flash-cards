@@ -3,11 +3,11 @@ import { AsyncStorage } from "react-native";
 const DECKS_STORAGE_KEY = 'UdaciMobileFlashCards:Decks'
 
 export function getDecks() {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(JSON.parse)
 }
 
 export function getDeck(key) {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(decks => {return decks[key]})
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(decks => {return JSON.parse(decks[key])})
 }
 
 export function saveDeckTitle(title) {
@@ -21,12 +21,9 @@ export function addCardToDeck(title, card) {
             ...decks,
             [title]: {
                 ...decks[title],
-                cards: {
-                    ...decks[title].cards,
-                    card
+                ...decks[title].cards.push(card)
                 }
             }
-        }
         AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(updatedDecks));
     });
 }

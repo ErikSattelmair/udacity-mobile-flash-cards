@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { KeyboardAvoidingView, TouchableOpacity, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
-import {NavigationActions} from "react-navigation";
+import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends Component {
 
@@ -20,7 +20,7 @@ class AddDeck extends Component {
         const { dispatch } = this.props
         const { title } = this.state
 
-        dispatch(addDeck(title))
+        saveDeckTitle(title).then(dispatch(addDeck(title)))
 
         this.setState({
             title: ''
