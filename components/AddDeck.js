@@ -47,7 +47,7 @@ class AddDeck extends Component {
                     placeholder='Enter title...'
                 />
                 <TouchableOpacity style={styles.submit} onPress={this.handleSubmit} disabled={submitButtonDisabled}>
-                    <Text style={submitButtonDisabled ? styles.submit_text_disabled : styles.submit_text}>Submit</Text>
+                    <Text style={submitButtonDisabled ? styles.submit_text_disabled : styles.submit_text}>Create Deck</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         )
