@@ -31,10 +31,6 @@ export function addCardToDeck(title, card) {
     });
 }
 
-
-
-
-
 export function clearLocalNotification() {
     return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
         Notifications.cancelAllScheduledNotificationsAsync

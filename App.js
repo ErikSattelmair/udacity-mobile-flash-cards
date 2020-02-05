@@ -7,8 +7,13 @@ import middleware from './middleware'
 import { purple } from "./utils/colors";
 import FlashCardStatusBar from './components/FlashCardStatusBar'
 import Navigation from "./components/Navigation";
+import {setLocalNotification} from "./utils/api";
 
 export default class App extends Component {
+
+    componentDidMount() {
+        setLocalNotification();
+    }
 
     render() {
         return (

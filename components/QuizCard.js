@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import {black, gray, green, red, white} from "../utils/colors";
+import { black, gray, green, red, white } from "../utils/colors";
+import { clearLocalNotification, setLocalNotification } from '../utils/api'
 
 class QuizCard extends Component {
 
@@ -18,20 +19,28 @@ class QuizCard extends Component {
         })
     }
 
-    updateCorrectAnswers = () => {
+    updateCorrectAnswers = (numberOfRelevantCards) => {
         this.setState({
             currentCardIndex: ++this.state.currentCardIndex,
             showAnswer: false,
             correctAnswers: ++this.state.correctAnswers,
         })
+
+        if(this.state.currentCardIndex >= numberOfRelevantCards) {
+            clearLocalNotification().then(setLocalNotification())
+        }
     }
 
-    updateIncorrectAnswers = () => {
+    updateIncorrectAnswers = (numberOfRelevantCards) => {
         this.setState({
             currentCardIndex: ++this.state.currentCardIndex,
             showAnswer: false,
             incorrectAnswers: ++this.state.incorrectAnswers
         })
+
+        if(this.state.currentCardIndex >= numberOfRelevantCards) {
+            clearLocalNotification().then(setLocalNotification())
+        }
     }
 
     goBackToDeck = () => {
@@ -84,10 +93,10 @@ class QuizCard extends Component {
                             <TouchableOpacity onPress={this.toggleShowAnswer}>
                                 <Text style={styles.flip}>Question</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.submit_correct} onPress={this.updateCorrectAnswers}>
+                            <TouchableOpacity style={styles.submit_correct} onPress={() => this.updateCorrectAnswers(numberOfRelevantCards)}>
                                 <Text style={styles.submit_text}>Correct</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.submit_incorrect} onPress={this.updateIncorrectAnswers}>
+                            <TouchableOpacity style={styles.submit_incorrect} onPress={() => this.updateIncorrectAnswers(numberOfRelevantCards)}>
                                 <Text style={styles.submit_text}>Incorrect</Text>
                             </TouchableOpacity>
                         </View>
