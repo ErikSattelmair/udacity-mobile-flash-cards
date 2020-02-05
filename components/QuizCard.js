@@ -60,7 +60,7 @@ class QuizCard extends Component {
         const numberOfRelevantCards = relevantCards.length
 
         if(this.state.currentCardIndex >= numberOfRelevantCards) {
-            return  <View style={styles.container}>
+            return  <View style={[styles.container, {justifyContent: 'center'}]}>
                         <Text style={styles.quiz_finished_heading}>Congratulations, you have completed the quiz!</Text>
                         <Text style={styles.quiz_finished_text}>You answered {this.state.correctAnswers} of {numberOfRelevantCards} {numberOfRelevantCards === 1 ? 'answer' : 'answers'} correctly.</Text>
                         <TouchableOpacity style={styles.submit_go_back_to_deck} onPress={this.goBackToDeck}>
@@ -98,6 +98,7 @@ class QuizCard extends Component {
                             </TouchableOpacity>
                         </View>
                 }
+                <View/>
             </View>
         )
     }
@@ -106,7 +107,7 @@ class QuizCard extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'stretch'
     },
     counter: {
